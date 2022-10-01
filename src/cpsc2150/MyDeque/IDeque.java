@@ -8,8 +8,8 @@ import java.util.*;
  */
 public interface IDeque {
     public static final int MAX_LENGTH = 100;
-    public Double[] myQ = new Double[MAX_LENGTH];
-    public LinkedList<Double> my_Q = new LinkedList<>();
+    public ArrayDeque[] myQ = new ArrayDeque[MAX_LENGTH];
+    public ListDeque my_Q = new ListDeque();
 
     /** Adds x to the end of the deque
      *
@@ -69,7 +69,7 @@ public interface IDeque {
      */
     default Double Peek() {
         // First example of checking if myQ is an array or not.
-        if(myQ.getClass().isArray()) {
+        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
 
             return myQ[0];
         }
@@ -88,7 +88,7 @@ public interface IDeque {
      */
     default Double endOfDeque() {
 
-        if(myQ.getClass().isArray()) {
+        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
 
             return myQ[MAX_LENGTH];
         }
@@ -107,7 +107,26 @@ public interface IDeque {
      * @pre deque != NULL AND 'x' is a double AND 'pos' is an int
      * @post pos = x
      */
-    //default void insert(Double x, int pos){}
+    default void insert(Double x, int pos){
+
+        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
+
+            Double[] tempArr = new Double[myQ.length + 1];
+            Double tempPos = myQ[pos];
+            for(int i = 0, j = 0; i < tempArr.length; i++) {
+
+                // Hopefully catching the position of where we want to insert and inserting 'pos'
+                if(i == pos) {
+                    tempArr[pos] = x;
+                }
+                // Creates the new array.
+                tempArr[j++] = myQ[i];
+            }
+
+
+        }
+
+    }
 
     /** Will remove whatever floating-point number that was in the 'pos'
      *  position of the deque and it should return it.
@@ -119,7 +138,30 @@ public interface IDeque {
      * @post pos = floating-point number AND pos is removed from deque
      *
      */
-    //default Double remove(int pos) {}
+    default Double remove(int pos) {
+
+        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
+            Double[] tempArr = new Double[myQ.length - 1];
+            Double tempPos = myQ[pos];
+            for(int i = 0, j = 0; i < tempArr.length; i++) {
+
+                // Skipping past the position we want to remove.
+                if(i == pos) {
+                    continue;
+                }
+                // Creates the new array.
+                tempArr[j++] = myQ[i];
+            }
+            return tempPos;
+        }
+        else {
+            // Holds the value at the current position.
+            Double temp2 = my_Q.get(pos);
+            my_Q.remove(pos);
+
+            return temp2;
+        }
+    }
 
     /** Should return whatever floating-point number that was in the position 'pos'
      *  but does not remove it.
@@ -130,5 +172,16 @@ public interface IDeque {
      * @pre  deque != NULL AND pos is an int
      * @post pos = floating-point number
      */
-    //default Double get(int pos) {}
+    default Double get(int pos) {
+        // Simply returning what's at the positions asked for.
+        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
+
+            return  myQ[pos];
+        }
+        else {
+
+            return my_Q.get(pos);
+        }
+
+    }
 }
