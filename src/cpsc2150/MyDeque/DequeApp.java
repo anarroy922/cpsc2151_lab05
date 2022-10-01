@@ -37,6 +37,9 @@ you have gotten an answer, use it to initialize q appropriately.
         q.enqueue(x);
         x = 16.1;
         q.enqueue(x);
+
+
+
 //Add the code to print the deque. After the code is finished,
 // the deque should still contain all its values in order
 
@@ -49,5 +52,7 @@ you have gotten an answer, use it to initialize q appropriately.
             System.out.print(temp[i] + ", ");
             q.enqueue(temp[i]);
         }
+
+        System.out.print(q.endOfDeque());
     }
 }
