@@ -9,7 +9,7 @@ import java.util.*;
 public interface IDeque {
     public static final int MAX_LENGTH = 100;
     public ArrayDeque[] myQ = new ArrayDeque[MAX_LENGTH];
-    public ListDeque my_Q = new ListDeque();
+    public ListDeque my_Q = new ListDeque(); // New way of implementation here.
 
     /** Adds x to the end of the deque
      *
