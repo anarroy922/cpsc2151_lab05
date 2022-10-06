@@ -8,8 +8,8 @@ import java.util.*;
  */
 public interface IDeque {
     public static final int MAX_LENGTH = 100;
-    public ArrayDeque[] myQ = new ArrayDeque[MAX_LENGTH];
-    public ListDeque my_Q = new ListDeque(); // New way of implementation here.
+    public Double[] myQ = new Double[MAX_LENGTH];
+    public LinkedList<Double> my_Q = new LinkedList<>();
 
     /** Adds x to the end of the deque
      *
@@ -68,15 +68,9 @@ public interface IDeque {
      * @post floating-point number = front of the deque
      */
     default Double Peek() {
-        // First example of checking if myQ is an array or not.
-        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
-
-            return myQ[0];
-        }
-        else {
-            return my_Q.peekFirst();
-        }
-
+        Double value = dequeue();
+        inject(value);
+        return value;
     }
 
     /** Should return the floating-point number at the end of the deque
@@ -87,16 +81,9 @@ public interface IDeque {
      * @post Peek = the floating-point number from the end of deque.
      */
     default Double endOfDeque() {
-
-        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
-
-            return myQ[MAX_LENGTH];
-        }
-        else {
-
-            return my_Q.peekLast();
-        }
-
+        Double value = removeLast();
+        enqueue(value);
+        return value;
     }
 
     /** Will insert 'x' at position 'pos' in the deque.
@@ -107,25 +94,21 @@ public interface IDeque {
      * @pre deque != NULL AND 'x' is a double AND 'pos' is an int
      * @post pos = x
      */
-    default void insert(Double x, int pos){
+    default void insert(Double x, int pos) {
+        if (myQ.getClass().isArray()) {
+            pos--;
+            Double tempArray[] = new Double[pos];
+            pos--;
 
-        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
-
-            Double[] tempArr = new Double[myQ.length + 1];
-            Double tempPos = myQ[pos];
-            for(int i = 0, j = 0; i < tempArr.length; i++) {
-
-                // Hopefully catching the position of where we want to insert and inserting 'pos'
-                if(i == pos) {
-                    tempArr[pos] = x;
-                }
-                // Creates the new array.
-                tempArr[j++] = myQ[i];
+            for (int i = 0; i <= pos; i++) {
+                tempArray[i] = dequeue();
             }
-
-
+            inject(x);
+            for (int i = 0; i >= 0; i--) {
+                inject(tempArray[i]);
+            }
         }
-
+        // Add and else statement for in case of linked list.
     }
 
     /** Will remove whatever floating-point number that was in the 'pos'
@@ -139,28 +122,18 @@ public interface IDeque {
      *
      */
     default Double remove(int pos) {
+        pos--;
+        Double tempArray[] = new Double[pos];
 
-        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
-            Double[] tempArr = new Double[myQ.length - 1];
-            Double tempPos = myQ[pos];
-            for(int i = 0, j = 0; i < tempArr.length; i++) {
-
-                // Skipping past the position we want to remove.
-                if(i == pos) {
-                    continue;
-                }
-                // Creates the new array.
-                tempArr[j++] = myQ[i];
-            }
-            return tempPos;
+        for (int i = 0; i < pos; i++) {
+            tempArray[i] = dequeue();
         }
-        else {
-            // Holds the value at the current position.
-            Double temp2 = my_Q.get(pos);
-            my_Q.remove(pos);
+        Double val = dequeue();
 
-            return temp2;
+        for(int i = (pos-1); i >= 0; i--) {
+            inject(tempArray[i]);
         }
+        return val;
     }
 
     /** Should return whatever floating-point number that was in the position 'pos'
@@ -173,15 +146,20 @@ public interface IDeque {
      * @post pos = floating-point number
      */
     default Double get(int pos) {
-        // Simply returning what's at the positions asked for.
-        if(myQ.getClass().isArray() == myQ.getClass().isArray()) {
+        Double tempArray[] = new Double[pos];
+        pos--;
 
-            return  myQ[pos];
-        }
-        else {
-
-            return my_Q.get(pos);
+        for(int i = 0; i <= pos; i++) {
+            tempArray[i] = dequeue();
         }
 
+        Double value = tempArray[pos];
+
+        for(int i = pos; i >= 0; i--) {
+            inject(tempArray[i]);
+        }
+        return value;
     }
+
+
 }
