@@ -1,9 +1,9 @@
 package cpsc2150.MyDeque;
 
 
-public class ArrayDeque extends AbsDeque implements IDeque {
+public class ArrayDeque<Type> extends AbsDeque<Type> implements IDeque<Type>{
     // where the data is stored. myQ[0] is the front of the deque
-    private Double[] myQ;
+    private Type[] myQ;
     // tracks how many items are in the deque
     // also used to find the end of the deque
     private int myLength;
@@ -14,7 +14,7 @@ public class ArrayDeque extends AbsDeque implements IDeque {
      * @post Double[MAX_LENGTH] myQ = NULL
      */
     public ArrayDeque() {
-        myQ = new Double[MAX_LENGTH];
+        myQ = (Type[]) new Double[MAX_LENGTH];
         myLength = 0;
     }
 
@@ -24,30 +24,31 @@ public class ArrayDeque extends AbsDeque implements IDeque {
      * @pre x!= NULL && queue.length() != MAX_LENGTH
      * @post x is at end of deque
      */
-    public void enqueue(Double x) {
+    public void enqueue(Type x) {
         if(myLength != myQ.length) {
             myQ[myLength] = x;
             myLength++;
         }
     }
 
-    /** removes and returns the double at the front of the deque
+    /**
+     * removes and returns the double at the front of the deque
      *
      * @return double at front of deque
      * @pre deque != NULL and first value in deque is a double
      * @post enqueue = first double in deque and deque = #deque
      */
-    public Double dequeue() {
+    public Type dequeue() {
         if(myLength != 0) {
-            double temp = myQ[0];
+            Type temp = myQ[0];
             for (int i = 1; i < myLength; i++) {
                 myQ[i - 1] = myQ[i];
             }
             myLength--;
             return temp;
         }
-        else return 0.0;
-    }
+       else return null;
+   }
 
 
     /** Adds x to the front of the deque
@@ -56,29 +57,33 @@ public class ArrayDeque extends AbsDeque implements IDeque {
      * @pre x != NULL && queue.length() != MAX_LENGTH
      * @post x is at beginning of deque
      */
-    public void inject(Double x) {
+    public void inject(Type x) {
+
         if(myLength != myQ.length) {
+        }
             for (int i = 0; i < myLength; i++) {
                 myQ[i + 1] = myQ[i];
             }
             myQ[0] = x;
             myLength++;
         }
-    }
 
-    /**removes and returns the double at the end of the deque
+
+    /**
+     * removes and returns the double at the end of the deque
      *
      * @return double at end of deque
      * @pre deque != NULL and last value in deque is a double
      * @post inject = last double in deque and deque = #deque
      */
-    public Double removeLast() {
+    public Type removeLast() {
         if(myLength != 0) {
-            Double temp = myQ[myLength];
-            myQ[myLength] = 0.0;
+            Type temp = myQ[myLength];
+            myQ[myLength] = null;
             return temp;
         }
-        return 0.0;
+        Type holder = null;
+        return holder;
     }
 
     /**returns the number of doubles in the deque

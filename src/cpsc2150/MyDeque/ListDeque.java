@@ -1,9 +1,9 @@
 package cpsc2150.MyDeque;
 import java.util.*;
-public class ListDeque extends LinkedList<Double> implements IDeque{
+public class ListDeque<Type> extends LinkedList<Type> implements IDeque<Type>{
     // this time store the deque in a list
     // myQ.get(0) is the front of the deque
-    private LinkedList<Double> myQ;
+    private LinkedList<Type> myQ;
     // complete the class
 
     /** Simply creates a new linked list of Doubles.
@@ -22,18 +22,19 @@ public class ListDeque extends LinkedList<Double> implements IDeque{
      * @pre x!= NULL && queue.length() != MAX_LENGTH
      * @post x is at end of deque
      */
-    public void enqueue(Double x) {
+    public void enqueue(Type x) {
 
-        myQ.add(x);
+        myQ.add((Type) x);
     }
 
-    /** removes and returns the double at the front of the deque
+    /**
+     * removes and returns the double at the front of the deque
      *
      * @return double at front of deque
      * @pre deque != NULL and first value in deque is a double
      * @post enqueue = first double in deque and deque = #deque
      */
-    public Double dequeue() {
+    public Type dequeue() {
 
         return myQ.removeFirst();
 
@@ -46,20 +47,21 @@ public class ListDeque extends LinkedList<Double> implements IDeque{
      * @pre x != NULL && queue.length() != MAX_LENGTH
      * @post x is at beginning of deque
      */
-    public void inject(Double x) {
+    public void inject(Type x) {
 
-        myQ.add(1,x);
+        myQ.add(x);
     }
 
-    /**removes and returns the double at the end of the deque
+    /**
+     * removes and returns the double at the end of the deque
      *
      * @return double at end of deque
      * @pre deque != NULL and last value in deque is a double
      * @post inject = last double in deque and deque = #deque
      */
-    public Double removeLast() {
+    public Type removeLast() {
 
-        return myQ.pollLast();
+        return (Type) myQ.pollLast();
     }
 
     /**returns the number of doubles in the deque

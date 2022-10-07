@@ -2,7 +2,7 @@ package cpsc2150.MyDeque;
 
 import cpsc2150.MyDeque.IDeque;
 
-public abstract class AbsDeque implements IDeque {
+public abstract class AbsDeque<Type> implements IDeque <Type>{
 
     /**
      *  Creates a formatted string from the values in the deque

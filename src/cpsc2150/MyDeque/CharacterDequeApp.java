@@ -2,12 +2,13 @@ package cpsc2150.MyDeque;
 
 import java.util.Scanner;
 
-public class DequeApp <Type> {
+public class CharacterDequeApp <Type> {
+
     public static void main(String[] args) {
         IDeque q = null;
         Scanner userInput = new Scanner(System.in);
         int iInput;
-        double dInput;
+        char dInput;
 /*
 Prompt the user to pick an implementation using the following
 message: "Enter 1 for array implementation or 2 for List
@@ -51,47 +52,31 @@ you have gotten an answer, use it to initialize q appropriately.
 
                 case 1: //add to the end
                     if (q.length() < q.MAX_LENGTH) {
-                        System.out.println("What double to add to the end of the Deque?");
-
-                        dInput = Double.parseDouble(String.valueOf(userInput.nextDouble()));
+                        System.out.println("What character to add to the end of the Deque?");
+                        dInput = userInput.next().charAt(0);
 
                         q.enqueue(dInput);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     } else {
 
-                        System.out.println("What double to add to the end of the Deque?");
-
-                        dInput = Double.parseDouble(String.valueOf(userInput.nextDouble()));
+                        System.out.println("What character to add to the end of the Deque?");
+                        dInput = userInput.next().charAt(0);
 
                         q.enqueue(dInput);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     }
                     break;
 
                 case 2: //add to the front
                     if (q.length() < q.MAX_LENGTH) {
-                        System.out.println("What double to inject to the front of the Deque?");
-
-                        dInput = Double.parseDouble(String.valueOf(userInput.nextDouble()));
+                        System.out.println("What character to inject to the front of the Deque?");
+                        dInput = userInput.next().charAt(0);
 
                         q.inject(dInput);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     } else {
 
-                        System.out.println("What double to inject to the front of the Deque?");
-
-                        dInput = Double.parseDouble(String.valueOf(userInput.nextDouble()));
+                        System.out.println("What character to inject to the front of the Deque?");
+                        dInput = userInput.next().charAt(0);
 
                         q.inject(dInput);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
 
                     }
                     break;
@@ -99,16 +84,14 @@ you have gotten an answer, use it to initialize q appropriately.
                 case 3: //remove from the front
                     if (q != null) {
 
-                        System.out.println("Double at the front: " + q.dequeue());
-                        System.out.println("Deque is:\n" + q + "\n");
-
+                        System.out.println("Character at the front: " + q.dequeue());
                     }
                     break;
 
                 case 4: //remove from the end
                     if (q != null) {
 
-                        System.out.println("Double at the end: " + q.removeLast());
+                        System.out.println("Character at the end: " + q.removeLast());
                     }
                     break;
 
@@ -116,52 +99,42 @@ you have gotten an answer, use it to initialize q appropriately.
                     if (q != null) {
 
                         System.out.println("Peek: " + q.Peek());
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     }
                     break;
                 case 6: //peek from the end
                     if (q != null) {
 
-                        System.out.println("EndofDeque: " + q.endOfDeque());
-                        System.out.println("Deque is:\n" + q + "\n");
-
+                        System.out.println("End of Deque: " + q.endOfDeque());
                     }
                     break;
                 case 7: //insert to a position
                     if (q.length() <= q.MAX_LENGTH) {
 
-                        double userInsert;
+                        char userInsert;
                         int userPos;
                         System.out.println("What are you inserting?: ");
 
-                        userInsert = Double.parseDouble(String.valueOf(userInput.nextDouble()));
+                        userInsert = userInput.next().charAt(0);
 
                         System.out.println("Where are you inserting?: ");
 
-                        userPos = Integer.parseInt(String.valueOf(userInput.nextInt()));
+                        userPos = userInput.nextInt();
 
                         q.insert(userInsert, userPos);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     }
                     else {
 
-                        double userInsert;
+                        char userInsert;
                         int userPos;
                         System.out.println("What are you inserting?: ");
 
-                        userInsert = Double.parseDouble(String.valueOf(userInput.nextDouble()));
+                        userInsert = userInput.next().charAt(0);
 
                         System.out.println("Where are you inserting?: ");
 
-                        userPos = Integer.parseInt(String.valueOf(userInput.nextInt()));
+                        userPos = userInput.nextInt();
 
                         q.insert(userInsert, userPos);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     }
                     break;
                 case 8: //remove from a position
@@ -171,12 +144,9 @@ you have gotten an answer, use it to initialize q appropriately.
 
                         System.out.println("What position are you removing from?: ");
 
-                        userInsert = Integer.parseInt(String.valueOf(userInput.nextInt()));
+                        userInsert = userInput.nextInt();
 
                         q.remove(userInsert);
-
-                        System.out.println("Deque is:\n" + q + "\n");
-
 
 
                     }
@@ -185,25 +155,18 @@ you have gotten an answer, use it to initialize q appropriately.
                     int getInput;
                     System.out.println("What position were you looking for?: ");
 
-                    getInput = Integer.parseInt(String.valueOf(userInput.nextInt()));
+                    getInput = userInput.nextInt();
 
-
-                System.out.println("The position is: " + q.get(getInput));
-                    System.out.println("Deque is:\n" + q + "\n");
-
+                    System.out.println("The position is: " + q.get(getInput));
                     break;
                 case 10: //get the length
                     if (q.getClass().isArray()){
 
                         System.out.println("Length of Deque: " + q.length());
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     }
                     else {
 
                         System.out.println("Length of Deque: " + q.length());
-                        System.out.println("Deque is:\n" + q + "\n");
-
                     }
                     break;
 
@@ -211,33 +174,21 @@ you have gotten an answer, use it to initialize q appropriately.
 
                     q.clear();
 
-                    System.out.println("Deque is:\n" + q + "\n");
-
-
                     break;
 
                 case 12: //quit
 
                     System.exit(0);
+
                     break;
 
                 default:
                     System.out.println("Not a valid option!");
                     iInput = 13;
             }
+            System.out.println("Deque is:\n" + q + "\n");
         }
 
-
-        /*Double x = 3.0;
-        q.enqueue(x);
-        x = -1.3;
-        q.enqueue(x);
-        x = -2.4;
-        q.enqueue(x);
-        x = 5.3;
-        q.enqueue(x);
-        x = 16.1;
-        q.enqueue(x);*/
 //Add the code to print the deque. After the code is finished,
 // the deque should still contain all its values in order
 
@@ -252,3 +203,4 @@ you have gotten an answer, use it to initialize q appropriately.
         }
     }
 }
+
